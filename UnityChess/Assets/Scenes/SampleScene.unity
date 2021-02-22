@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &59046391
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ PrefabInstance:
     - target: {fileID: 8330202913074257971, guid: 033eae3c7491fe241a8ce7daccbc19c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8330202913074257971, guid: 033eae3c7491fe241a8ce7daccbc19c0,
         type: 3}
@@ -292,6 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Pionek
+  Board: {fileID: 0}
 --- !u!65 &317404799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &384258805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -476,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &591941771
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -600,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &721755850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -632,6 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &754687716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -664,6 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Knight
+  Board: {fileID: 0}
 --- !u!65 &772464572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -696,6 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Bishop
+  Board: {fileID: 0}
 --- !u!65 &875871194
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1171,6 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Rook
+  Board: {fileID: 0}
 --- !u!65 &1039812289
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1323,6 +1332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Bishop
+  Board: {fileID: 0}
 --- !u!65 &1061788871
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1475,6 +1485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &1187382959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1867,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Knight
+  Board: {fileID: 0}
 --- !u!65 &1461018505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2019,6 +2031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: King
+  Board: {fileID: 0}
 --- !u!65 &1625123731
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2051,6 +2064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Queen
+  Board: {fileID: 0}
 --- !u!65 &1707075836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2203,6 +2217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Rook
+  Board: {fileID: 0}
 --- !u!65 &1859187639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2246,7 +2261,7 @@ PrefabInstance:
     - target: {fileID: 8330202913074257971, guid: 033eae3c7491fe241a8ce7daccbc19c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8330202913074257971, guid: 033eae3c7491fe241a8ce7daccbc19c0,
         type: 3}
@@ -2650,6 +2665,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _squarePrefab: {fileID: -6736224664189193225, guid: 8a19e4eabe4219149bc2ccea36db7342,
     type: 3}
+  ChessPieces: []
+  Planes: []
 --- !u!4 &2062617745
 Transform:
   m_ObjectHideFlags: 0
@@ -2683,6 +2700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Skoczek
+  Board: {fileID: 0}
 --- !u!65 &2112827515
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChessPiece : MonoBehaviour
@@ -8,10 +9,13 @@ public class ChessPiece : MonoBehaviour
     private string _name;
     public string Name => _name; 
     public bool Moved { get; set; }
+    public Board Board;
 
-    private void Awake()
+    private void Start()
     {
-    
+        Board = FindObjectOfType<Board>();
+        Board.ChessPieces.Add(this);
+        //Debug.Log(string.Format("{0} : {1}", piece.Name, piece.transform.position));
     }
     
     public virtual List<Vector3> GetMoves()

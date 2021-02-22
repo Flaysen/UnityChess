@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class Square : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ChessPiece chessPiece;
+    public Vector3 position;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -10,6 +10,8 @@ public class MoveHandler : MonoBehaviour
         private ChessPiece _selectedChessPiece;
         public event Action<ChessPiece> OnChessPieceSelection;
         public event Action OnDeselection;
+
+        public Board Board { get; set; }
         
         private void Awake()
         {
@@ -31,7 +33,7 @@ public class MoveHandler : MonoBehaviour
                 {               
                     if(Input.GetKeyDown(KeyCode.Mouse0))
                     {
-                        Debug.Log(chessPiece.Name);
+                        //Debug.Log(chessPiece.Name);
                         _selectedChessPiece = chessPiece;
                         OnChessPieceSelection?.Invoke(chessPiece);
                     }
@@ -48,6 +50,7 @@ public class MoveHandler : MonoBehaviour
                         _selectedChessPiece.transform.position = square.transform.position;
                         _selectedChessPiece.Moved = true;
                         _selectedChessPiece = null;
+                        
                         OnDeselection?.Invoke();
                     }
                 }

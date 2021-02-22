@@ -11,8 +11,10 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Square _squarePrefab;
 
-    private List<BoardPosition> _boardPositions = new List<BoardPosition>();
-    private List<Square> _planes = new List<Square>();
+    //private List<BoardPosition> _boardPositions = new List<BoardPosition>();
+
+    public List<ChessPiece> ChessPieces = new List<ChessPiece>();
+    public List<Square> Planes = new List<Square>();
 
     private MoveHandler _moveHandler;
 
@@ -35,7 +37,7 @@ public class Board : MonoBehaviour
 
         plane.GetComponent<MeshRenderer>().material.color = ((position.x + position.z) % 2 == 0) ? Color.black : Color.white;
 
-        _planes.Add(plane);
+        Planes.Add(plane);
     }
 
     private void InitializeBoardPositions()
@@ -44,7 +46,7 @@ public class Board : MonoBehaviour
         {
             for(int z = 0; z < SIZE_Z; z++)
             {            
-                _boardPositions.Add(new BoardPosition(new Vector3(x, 0, z)));  
+                //_boardPositions.Add(new BoardPosition(new Vector3(x, 0, z)));  
                 CreatePlane(new Vector3(x, 0f, z));
 
             }
@@ -57,14 +59,14 @@ public class Board : MonoBehaviour
 
         foreach(Vector3 position in chessPiece.GetMoves())
         {
-            Square plane = _planes.Where(x => x.transform.position == position).FirstOrDefault();
+            Square plane = Planes.Where(x => x.transform.position == position).FirstOrDefault();
             if (plane != null) plane.GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
 
     private void ClearBoardColors()
     {
-        foreach(Square plane in _planes)
+        foreach(Square plane in Planes)
         {
             Vector3 position = plane.transform.position; 
             plane.GetComponent<MeshRenderer>().material.color = ((position.x + position.z) % 2 == 0) ? Color.black : Color.white;
