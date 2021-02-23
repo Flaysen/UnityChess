@@ -5,9 +5,7 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     public const int BOARD_SIZE = 8;
-
-    [SerializeField]
-    private Square _squarePrefab;
+    [SerializeField] private Square _squarePrefab;
     public List<ChessPieceBase> ChessPieces = new List<ChessPieceBase>();
     private List<Square> _planes = new List<Square>();
     private MoveHandler _moveHandler;
@@ -21,9 +19,10 @@ public class Board : MonoBehaviour
         _moveHandler.OnDeselection += DrawChecker;       
     }
 
-    public bool CheckIfPositionOccupied(Vector3 position)
+    public bool CheckIfPositionOccupied(Vector3 position, PiecesColor color)
     {
-        return ChessPieces.Where(p => p.transform.position == position).FirstOrDefault();
+        ChessPieceBase chessPiece = ChessPieces.Where(p => p.transform.position == position).FirstOrDefault();
+        return chessPiece != null && chessPiece.Color == color;
     }
 
     public bool CheckIfPositionOutOfBoard(Vector3 position)

@@ -5,7 +5,10 @@ public class Pawn : ChessPieceBase
 {
     public override List<Vector3> GetMoves()
     {
-        return (Moved) ? GetMovesInDirection(new Vector3(0, 0, 1), 1f) :
-            GetMovesInDirection(new Vector3(0, 0, 1), 2f);
+        Vector3 direction = (_color == PiecesColor.White) ?
+            new Vector3(0, 0, 1) : new Vector3(0, 0, -1); 
+
+        return (Moved) ? GetMovesInDirection(direction, 1f) :
+            GetMovesInDirection(direction, 2f);
     }
 }

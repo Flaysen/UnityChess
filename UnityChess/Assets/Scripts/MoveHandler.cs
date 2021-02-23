@@ -38,11 +38,27 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
                 {
                     _selectedChessPiece.transform.position = square.transform.position;
                     _selectedChessPiece.Moved = true;
+
                     _selectedChessPiece = null;
-                    
                     OnDeselection?.Invoke();
                 }
             }
+
+            ChessPieceBase chessPiece = GetRaycastedChessPiece();
+
+            if(chessPiece != null)
+            {               
+                if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece.GetMoves().Contains(chessPiece.transform.position))
+                {
+                    _selectedChessPiece.transform.position = chessPiece.transform.position;
+                    _selectedChessPiece.Moved = true;
+                    chessPiece.gameObject.SetActive(false);
+
+                    _selectedChessPiece = null; 
+                    OnDeselection?.Invoke();
+                }
+            }
+
         }    
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
