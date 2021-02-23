@@ -32,4 +32,20 @@ public class ChessPiece : MonoBehaviour
     {
 
     }
+    protected List<Vector3> GetMovesInDirection(Vector3 direction, float range)
+    {
+        List<Vector3> possibleMoves = new List<Vector3>();
+
+        for(int distance = 1; distance <= range; distance++ )
+        {   
+            Vector3 position = (direction * distance) + transform.position;
+            if(Board.CheckIfPositionOccupied(position) || Board.CheckIfPositionOutOfBoard(position))
+            {
+               break;
+            }
+            possibleMoves.Add(position);         
+        }
+
+        return possibleMoves;
+    }
 }

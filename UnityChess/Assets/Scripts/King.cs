@@ -6,16 +6,16 @@ public class King : ChessPiece
 {
     public override List<Vector3> GetMoves()
     {
-         List<Vector3> possibleMoves = new List<Vector3>();
+        List<Vector3> possibleMoves = new List<Vector3>();
 
-        possibleMoves.Add(new Vector3(1, 0, 0) + transform.position);
-        possibleMoves.Add(new  Vector3(0, 0, 1) + transform.position);
-        possibleMoves.Add(new Vector3(-1, 0, 0) + transform.position);
-        possibleMoves.Add(new  Vector3(0, 0, -1) + transform.position);
-        possibleMoves.Add(new Vector3(1, 0, 1) + transform.position);
-        possibleMoves.Add(new  Vector3(-1, 0, -1) + transform.position);
-        possibleMoves.Add(new Vector3(1, 0, -1) + transform.position);
-        possibleMoves.Add(new  Vector3(-1, 0, 1) + transform.position);
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(0, 0, 1), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(1, 0, 0), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(0, 0, -1), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(-1, 0, 0), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(1, 0, 1), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(-1, 0, -1), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(-1, 0, 1), 1f));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(1, 0, -1), 1f));
 
         return possibleMoves;
     }
