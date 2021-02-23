@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Knight : ChessPiece
+public class Knight : ChessPieceBase
 {
     public override List<Vector3> GetMoves()
     {
-         List<Vector3> possibleMoves = new List<Vector3>();
+        List<Vector3> possibleMoves = new List<Vector3>();
 
         possibleMoves.AddRange(GetMovesInDirection(new Vector3(2, 0, 1), 1f));
         possibleMoves.AddRange(GetMovesInDirection(new Vector3(2, 0, -1), 1f));

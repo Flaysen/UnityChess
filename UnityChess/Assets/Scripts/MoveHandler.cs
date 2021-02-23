@@ -1,89 +1,78 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveHandler : MonoBehaviour
+public class MoveHandler : MonoBehaviour // TO REFACTOR
 {
-        private Camera _camera;
-
-        private ChessPiece _selectedChessPiece;
-        public event Action<ChessPiece> OnChessPieceSelection;
-        public event Action OnDeselection;
-
-        public Board Board { get; set; }
+    private Camera _camera;
+    private ChessPieceBase _selectedChessPiece;
+    public event Action<ChessPieceBase> OnChessPieceSelection;
+    public event Action OnDeselection;
+    
+    private void Awake()
+    {
+        _camera = FindObjectOfType<Camera>();    
+    }
         
-        private void Awake()
+    void Update()
+    {
+        if(_selectedChessPiece == null) 
         {
-            _camera = FindObjectOfType<Camera>();    
-        }
+            ChessPieceBase chessPiece = GetRaycastedChessPiece();
 
-        void Start()
-        {
-            
-        }
-            
-        void Update()
-        {
-            if(_selectedChessPiece == null) 
-            {
-                ChessPiece chessPiece = GetRaycastedChessPiece();
-
-                if(chessPiece != null)
-                {               
-                    if(Input.GetKeyDown(KeyCode.Mouse0))
-                    {
-                        //Debug.Log(chessPiece.Name);
-                        _selectedChessPiece = chessPiece;
-                        OnChessPieceSelection?.Invoke(chessPiece);
-                    }
+            if(chessPiece != null)
+            {               
+                if(Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _selectedChessPiece = chessPiece;
+                    OnChessPieceSelection?.Invoke(chessPiece);
                 }
             }
-            else
-            {
-                Square square = GetRaycastedSquare();
+        }
+        else
+        {
+            Square square = GetRaycastedSquare();
 
-                if(square != null )
-                {               
-                    if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece.GetMoves().Contains(square.transform.position))
-                    {
-                        _selectedChessPiece.transform.position = square.transform.position;
-                        _selectedChessPiece.Moved = true;
-                        _selectedChessPiece = null;
-                        
-                        OnDeselection?.Invoke();
-                    }
+            if(square != null)
+            {               
+                if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece.GetMoves().Contains(square.transform.position))
+                {
+                    _selectedChessPiece.transform.position = square.transform.position;
+                    _selectedChessPiece.Moved = true;
+                    _selectedChessPiece = null;
+                    
+                    OnDeselection?.Invoke();
                 }
-            }    
-            if(Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                OnDeselection?.Invoke();
-                _selectedChessPiece = null;
-            }              
-        }
-        private ChessPiece GetRaycastedChessPiece()
-        {
-            RaycastHit hitInfo;       
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-            if(Physics.Raycast(ray, out hitInfo))
-            {
-                ChessPiece chessPiece = hitInfo.collider.GetComponent<ChessPiece>();
-                return (chessPiece) ? chessPiece : null;
             }
-            else return null;
-        }
-
-        private Square GetRaycastedSquare()
+        }    
+        if(Input.GetKeyDown(KeyCode.Mouse1))
         {
-            RaycastHit hitInfo;       
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            OnDeselection?.Invoke();
+            _selectedChessPiece = null;
+        }              
+    }
+    private ChessPieceBase GetRaycastedChessPiece()
+    {
+        RaycastHit hitInfo;       
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray, out hitInfo))
-            {
-                Square square = hitInfo.collider.GetComponent<Square>();
-                return (square) ? square : null;
-            }
-            else return null;
+        if(Physics.Raycast(ray, out hitInfo))
+        {
+            ChessPieceBase chessPiece = hitInfo.collider.GetComponent<ChessPieceBase>();
+            return (chessPiece) ? chessPiece : null;
         }
+        else return null;
+    }
+
+    private Square GetRaycastedSquare()
+    {
+        RaycastHit hitInfo;       
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(ray, out hitInfo))
+        {
+            Square square = hitInfo.collider.GetComponent<Square>();
+            return (square) ? square : null;
+        }
+        else return null;
+    }
 }

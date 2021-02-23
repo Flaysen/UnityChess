@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Rook : ChessPiece
+public class Rook : ChessPieceBase
 {
     public override List<Vector3> GetMoves()
     {

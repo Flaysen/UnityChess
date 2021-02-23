@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Square : MonoBehaviour
 {
-    public ChessPiece chessPiece;
-    public Vector3 position;
 
 }

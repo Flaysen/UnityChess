@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Bishop : ChessPiece
+public class Bishop : ChessPieceBase
 {
     public override List<Vector3> GetMoves()
     {
