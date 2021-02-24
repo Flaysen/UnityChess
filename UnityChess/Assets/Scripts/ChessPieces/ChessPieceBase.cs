@@ -27,12 +27,18 @@ public class ChessPieceBase : MonoBehaviour
     {
         List<Vector3> possibleMoves = new List<Vector3>();
 
-        for(int distance = 1; distance <= range; distance++ )
+        for(int distance = 1; distance <= range; distance++)
         {   
             Vector3 position = (direction * distance) + transform.position;
-            if(_board.CheckIfPositionOccupied(position, _color) || _board.CheckIfPositionOutOfBoard(position)) //TODO split condition(occupied?, color?)
+            ChessPieceBase chessPiece = _board.CheckIfPositionOccupied(position);
+
+            if ((chessPiece != null && chessPiece.isActiveAndEnabled) || _board.CheckIfPositionOutOfBoard(position)) //TODO split condition(occupied?, color?)
             {
-               break;
+                if (chessPiece?.Color != _color)
+                {
+                    possibleMoves.Add(position); 
+                } 
+                break;         
             }
             possibleMoves.Add(position);         
         }

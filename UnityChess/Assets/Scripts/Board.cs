@@ -19,10 +19,10 @@ public class Board : MonoBehaviour
         _moveHandler.OnDeselection += DrawChecker;       
     }
 
-    public bool CheckIfPositionOccupied(Vector3 position, PiecesColor color)
+    public ChessPieceBase CheckIfPositionOccupied(Vector3 position)
     {
         ChessPieceBase chessPiece = ChessPieces.Where(p => p.transform.position == position).FirstOrDefault();
-        return chessPiece != null && chessPiece.Color == color;
+        return chessPiece;
     }
 
     public bool CheckIfPositionOutOfBoard(Vector3 position)
