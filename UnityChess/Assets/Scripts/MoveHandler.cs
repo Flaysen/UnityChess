@@ -6,9 +6,10 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
     private Camera _camera;
     private ChessPieceBase _selectedChessPiece;
     public event Action<ChessPieceBase> OnChessPieceSelection;
-    public event Action OnDeselection;
     public event Action<ChessPieceBase> OnMove;
-    
+    public event Action<ChessPieceBase> OnCapture;
+    public event Action OnDeselection;
+  
     private void Awake()
     {
         _camera = FindObjectOfType<Camera>();    
@@ -38,7 +39,6 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
                 if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece.GetMoves().Contains(square.transform.position))
                 {
                     _selectedChessPiece.transform.position = square.transform.position;
-                    _selectedChessPiece.Moved = true;
                     OnMove?.Invoke(_selectedChessPiece);
                     OnDeselection?.Invoke();
                     _selectedChessPiece = null; 
@@ -52,9 +52,8 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
                 if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece != null && _selectedChessPiece.GetMoves().Contains(chessPiece.transform.position))
                 {
                     _selectedChessPiece.transform.position = chessPiece.transform.position;
-                    _selectedChessPiece.Moved = true;
                     OnMove?.Invoke(_selectedChessPiece);
-                    chessPiece.gameObject.SetActive(false);           
+                    OnCapture?.Invoke(chessPiece);          
                     OnDeselection?.Invoke();
                     _selectedChessPiece = null; 
                 }

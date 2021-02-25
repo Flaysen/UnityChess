@@ -8,11 +8,14 @@ public class ChessPieceBase : MonoBehaviour
     public bool Moved { get; set; }
     public string Name => _name; 
     public PiecesColor Color => _color;
+    private MoveHandler _moveHandler;
 
     private Board _board;
 
     private void Start()
     {      
+        _moveHandler = FindObjectOfType<MoveHandler>();
+        _moveHandler.OnCapture += DisableOnCapture;
         RegisterPieceOnBoard(this);
     }
     
@@ -50,5 +53,13 @@ public class ChessPieceBase : MonoBehaviour
         }
 
         return possibleMoves;
+    }
+
+    protected virtual void DisableOnCapture(ChessPieceBase chessPiece)
+    {
+        if(chessPiece == this)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
