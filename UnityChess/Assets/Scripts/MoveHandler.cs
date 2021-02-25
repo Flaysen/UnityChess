@@ -7,6 +7,7 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
     private ChessPieceBase _selectedChessPiece;
     public event Action<ChessPieceBase> OnChessPieceSelection;
     public event Action OnDeselection;
+    public event Action<ChessPieceBase> OnMove;
     
     private void Awake()
     {
@@ -38,9 +39,9 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
                 {
                     _selectedChessPiece.transform.position = square.transform.position;
                     _selectedChessPiece.Moved = true;
-
-                    _selectedChessPiece = null;
+                    OnMove?.Invoke(_selectedChessPiece);
                     OnDeselection?.Invoke();
+                    _selectedChessPiece = null; 
                 }
             }
 
@@ -48,14 +49,14 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
 
             if(chessPiece != null)
             {               
-                if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece.GetMoves().Contains(chessPiece.transform.position))
+                if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece != null && _selectedChessPiece.GetMoves().Contains(chessPiece.transform.position))
                 {
                     _selectedChessPiece.transform.position = chessPiece.transform.position;
                     _selectedChessPiece.Moved = true;
-                    chessPiece.gameObject.SetActive(false);
-
-                    _selectedChessPiece = null; 
+                    OnMove?.Invoke(_selectedChessPiece);
+                    chessPiece.gameObject.SetActive(false);           
                     OnDeselection?.Invoke();
+                    _selectedChessPiece = null; 
                 }
             }
 
