@@ -19,14 +19,15 @@ public class Pawn : ChessPieceBase
     {
         List<Vector3> possibleMoves = new List<Vector3>();
 
-        Vector3 direction = (_color == PiecesColor.White) ?
-            new Vector3(0, 0, 1) : new Vector3(0, 0, -1); 
+        int side = (_color == PiecesColor.White) ? 1 : -1;
+
+        Vector3 direction =  new Vector3(0, 0, side);
 
         possibleMoves = (Moved) ? GetMovesInDirection(direction, 1f, false, true) :
             GetMovesInDirection(direction, 2f, false, true);
 
-        possibleMoves.AddRange(GetMovesInDirection(new Vector3(1, 0, 1), 1f, true));
-        possibleMoves.AddRange(GetMovesInDirection(new Vector3(-1, 0, 1), 1f, true));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(1, 0, side), 1f, true));
+        possibleMoves.AddRange(GetMovesInDirection(new Vector3(-1, 0, side), 1f, true));
  
         return possibleMoves;
     }
