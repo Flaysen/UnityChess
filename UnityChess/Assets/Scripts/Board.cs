@@ -7,7 +7,7 @@ public class Board : MonoBehaviour
     public const int BOARD_SIZE = 8;
     [SerializeField] private Square _squarePrefab;
     public List<ChessPieceBase> ChessPieces = new List<ChessPieceBase>();
-    private List<Square> _planes = new List<Square>();
+    private List<Square> _squares = new List<Square>();
     private MoveHandler _moveHandler;
 
     private void Awake()
@@ -44,13 +44,16 @@ public class Board : MonoBehaviour
 
     private void SpawnSquare(Vector3 position)
     {
-        Square plane = Instantiate(_squarePrefab);
-        plane.transform.parent = transform;
+        Square square = Instantiate(_squarePrefab);
+        square.SetName((int)position.x, (int)position.z);
 
-        plane.transform.localScale = new Vector3(.1f, 1f, .1f); //TODO set scale in prefab
-        plane.transform.position = position;  
+        square.transform.parent = transform;
 
-        _planes.Add(plane);
+        square.transform.localScale = new Vector3(.1f, 1f, .1f); //TODO set scale in prefab
+        square.transform.position = position;  
+
+
+        _squares.Add(square);
     }
 
     private void ColorPossibleMoves(ChessPieceBase chessPiece)
@@ -59,14 +62,14 @@ public class Board : MonoBehaviour
 
         foreach(Vector3 position in chessPiece.GetMoves())
         {
-            Square plane = _planes.Where(x => x.transform.position == position).FirstOrDefault();
+            Square plane = _squares.Where(x => x.transform.position == position).FirstOrDefault();
             if (plane != null) plane.GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
 
     private void DrawChecker()
     {
-        foreach(Square plane in _planes)
+        foreach(Square plane in _squares)
         {
             Vector3 position = plane.transform.position; 
             plane.GetComponent<MeshRenderer>().material.color = ((position.x + position.z) % 2 == 0) ? Color.black : Color.white;
