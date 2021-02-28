@@ -63,7 +63,8 @@ public class Board : MonoBehaviour
         foreach(Vector3 position in chessPiece.GetMoves())
         {
             Square plane = _squares.Where(x => x.transform.position == position).FirstOrDefault();
-            if (plane != null) plane.GetComponent<MeshRenderer>().material.color = Color.red;
+            ChessPieceBase figureToCapture = (CheckIfPositionOccupied(position));
+            if (plane != null) plane.GetComponent<MeshRenderer>().material.color = (figureToCapture?.Color != chessPiece?.Color && figureToCapture != null) ? Color.red : Color.cyan;
         }
     }
 

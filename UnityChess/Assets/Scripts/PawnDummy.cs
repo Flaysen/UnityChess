@@ -20,9 +20,9 @@ public class PawnDummy : ChessPieceBase
 
     protected override void DisableOnCapture(ChessPieceBase chessPiece, ChessPieceBase chessPiece1)
     {
-        if(chessPiece == this && chessPiece1.GetType() == typeof(PawnDummy))
+        if(chessPiece == this && chessPiece1.Type == PiecesType.Pawn)
         {
-             _pawn.gameObject.SetActive(false);
+            _pawn.gameObject.SetActive(false);
         }
     }
 }

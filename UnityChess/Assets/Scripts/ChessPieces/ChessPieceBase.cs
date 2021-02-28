@@ -5,9 +5,12 @@ public class ChessPieceBase : MonoBehaviour
 {
     [SerializeField] protected PiecesColor _color;
     [SerializeField] private string _name; 
+    [SerializeField] private PiecesType _type;
     public bool Moved { get; set; }
     public string Name => _name; 
     public PiecesColor Color => _color;
+    public PiecesType Type => _type;
+
     private MoveHandler _moveHandler;
 
     private Board _board;
@@ -32,7 +35,7 @@ public class ChessPieceBase : MonoBehaviour
     
     public virtual List<Vector3> GetMoves() => null;
 
-    protected List<Vector3> GetMovesInDirection(Vector3 direction, float range, bool isPawnMove = false, bool canNotCapture = false)
+    protected List<Vector3> GetMovesInDirection(Vector3 direction, float range, bool isPawnMove = false, bool canNotCapture = false) //TODO: separate function for pawn
     {
         List<Vector3> possibleMoves = new List<Vector3>();
 
@@ -41,9 +44,9 @@ public class ChessPieceBase : MonoBehaviour
             Vector3 position = (direction * distance) + transform.position;
             ChessPieceBase chessPiece = _board.CheckIfPositionOccupied(position);
 
-            if ((chessPiece != null && chessPiece.isActiveAndEnabled) || _board.CheckIfPositionOutOfBoard(position)) 
+            if ((chessPiece != null && chessPiece.isActiveAndEnabled || _board.CheckIfPositionOutOfBoard(position)))
             {
-                if (chessPiece?.Color != _color && !canNotCapture) 
+                if (chessPiece?.Color != _color && !canNotCapture && chessPiece?.Type != PiecesType.King || chessPiece.GetType() == typeof(PawnDummy)) 
                 {
                     possibleMoves.Add(position); 
                 } 
