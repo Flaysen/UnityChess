@@ -64,7 +64,7 @@ public class Board : MonoBehaviour
         {
             Square plane = _squares.Where(x => x.transform.position == position).FirstOrDefault();
             ChessPieceBase figureToCapture = (CheckIfPositionOccupied(position));
-            if (plane != null) plane.GetComponent<MeshRenderer>().material.color = (figureToCapture?.Color != chessPiece?.Color && figureToCapture != null) ? Color.red : Color.cyan;
+            if (plane != null) plane.GetComponent<MeshRenderer>().material.color = (figureToCapture?.Color != chessPiece?.Color && figureToCapture != null && figureToCapture.isActiveAndEnabled) ? Color.red : Color.cyan;
         }
     }
 
