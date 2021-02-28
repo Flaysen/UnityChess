@@ -7,7 +7,7 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
     private ChessPieceBase _selectedChessPiece;
     public event Action<ChessPieceBase> OnChessPieceSelection;
     public event Action<ChessPieceBase> OnMove;
-    public event Action<ChessPieceBase> OnCapture;
+    public event Action<ChessPieceBase, ChessPieceBase> OnCapture;
     public event Action OnDeselection;
   
     private void Awake()
@@ -53,7 +53,7 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
                 {
                     _selectedChessPiece.transform.position = chessPiece.transform.position;
                     OnMove?.Invoke(_selectedChessPiece);
-                    OnCapture?.Invoke(chessPiece);          
+                    OnCapture?.Invoke(chessPiece, _selectedChessPiece);          
                     OnDeselection?.Invoke();
                     _selectedChessPiece = null; 
                 }

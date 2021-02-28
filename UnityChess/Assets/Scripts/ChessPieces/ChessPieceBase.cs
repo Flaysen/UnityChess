@@ -41,21 +41,21 @@ public class ChessPieceBase : MonoBehaviour
             Vector3 position = (direction * distance) + transform.position;
             ChessPieceBase chessPiece = _board.CheckIfPositionOccupied(position);
 
-            if ((chessPiece != null && chessPiece.isActiveAndEnabled) || _board.CheckIfPositionOutOfBoard(position)) //czy stoi jakas figura lub koniec planszy 
+            if ((chessPiece != null && chessPiece.isActiveAndEnabled) || _board.CheckIfPositionOutOfBoard(position)) 
             {
-                if (chessPiece?.Color != _color && !canNotCapture) // jesli przeciwnik
+                if (chessPiece?.Color != _color && !canNotCapture) 
                 {
-                    possibleMoves.Add(position); // dodaj bicia
+                    possibleMoves.Add(position); 
                 } 
                 break;         
             }
-            if (!isPawnMove) possibleMoves.Add(position); //dodaj nieblokowane ruchy         
+            if (!isPawnMove) possibleMoves.Add(position);       
         }
 
         return possibleMoves;
     }
 
-    protected virtual void DisableOnCapture(ChessPieceBase chessPiece)
+    protected virtual void DisableOnCapture(ChessPieceBase chessPiece, ChessPieceBase chessPiece1)
     {
         if(chessPiece == this)
         {

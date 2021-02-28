@@ -15,11 +15,12 @@ public class PawnDummy : ChessPieceBase
     public void SetConnectedPawn(Pawn pawn)
     {
         _pawn = pawn;
+        _color = pawn.Color;
     }
 
-    protected override void DisableOnCapture(ChessPieceBase chessPiece)
+    protected override void DisableOnCapture(ChessPieceBase chessPiece, ChessPieceBase chessPiece1)
     {
-        if(chessPiece == this)
+        if(chessPiece == this && chessPiece1.GetType() == typeof(PawnDummy))
         {
              _pawn.gameObject.SetActive(false);
         }
