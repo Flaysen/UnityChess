@@ -9,10 +9,13 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
     public event Action<ChessPieceBase> OnMove;
     public event Action<ChessPieceBase, ChessPieceBase> OnCapture;
     public event Action OnDeselection;
+
+    public Board Board { get; set; }
   
     private void Awake()
     {
-        _camera = FindObjectOfType<Camera>();    
+        _camera = FindObjectOfType<Camera>(); 
+        Board = FindObjectOfType<Board>();   
     }
         
     void Update()
@@ -38,24 +41,41 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
             {               
                 if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece.GetMoves().Contains(square.transform.position))
                 {
+                     Vector3 temp = _selectedChessPiece.transform.position;
                     _selectedChessPiece.transform.position = square.transform.position;
-                    OnMove?.Invoke(_selectedChessPiece);
-                    OnDeselection?.Invoke();
-                    _selectedChessPiece = null; 
+                    if(!Board.CheckIfCheck(_selectedChessPiece.Color))
+                    {
+                        OnMove?.Invoke(_selectedChessPiece);
+                        OnDeselection?.Invoke();
+                        _selectedChessPiece = null; 
+                    }      
+                    else 
+                    {
+                        _selectedChessPiece.transform.position = temp;
+                    }
                 }
             }
 
             ChessPieceBase chessPiece = GetRaycastedChessPiece();
 
-            if(chessPiece != null)
+            if(chessPiece != null && chessPiece.Type != PiecesType.King)
             {               
                 if(Input.GetKeyDown(KeyCode.Mouse0) && _selectedChessPiece != null && _selectedChessPiece.GetMoves().Contains(chessPiece.transform.position))
                 {
+                    Vector3 temp = _selectedChessPiece.transform.position;
                     _selectedChessPiece.transform.position = chessPiece.transform.position;
-                    OnMove?.Invoke(_selectedChessPiece);
-                    OnCapture?.Invoke(chessPiece, _selectedChessPiece);          
-                    OnDeselection?.Invoke();
-                    _selectedChessPiece = null; 
+                    if(!Board.CheckIfCheck(_selectedChessPiece.Color))
+                    {
+                         OnMove?.Invoke(_selectedChessPiece);
+                        OnCapture?.Invoke(chessPiece, _selectedChessPiece);          
+                        OnDeselection?.Invoke();
+                        _selectedChessPiece = null; 
+                    }
+                    else 
+                    {
+                        _selectedChessPiece.transform.position = temp;
+                    }
+                   
                 }
             }
 
@@ -74,7 +94,7 @@ public class MoveHandler : MonoBehaviour // TO REFACTOR
         if(Physics.Raycast(ray, out hitInfo))
         {
             ChessPieceBase chessPiece = hitInfo.collider.GetComponent<ChessPieceBase>();
-            return (chessPiece) ? chessPiece : null;
+            return (chessPiece && chessPiece.GetType() != typeof(PawnDummy)) ? chessPiece : null;
         }
         else return null;
     }

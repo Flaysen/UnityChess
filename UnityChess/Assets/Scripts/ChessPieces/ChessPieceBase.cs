@@ -46,7 +46,7 @@ public class ChessPieceBase : MonoBehaviour
 
             if ((chessPiece != null && chessPiece.isActiveAndEnabled || _board.CheckIfPositionOutOfBoard(position)))
             {
-                if (chessPiece?.Color != _color && !canNotCapture && chessPiece?.Type != PiecesType.King || chessPiece.GetType() == typeof(PawnDummy)) 
+                if (chessPiece?.Color != _color && !canNotCapture ||  chessPiece?.GetType() == typeof(PawnDummy)) 
                 {
                     possibleMoves.Add(position); 
                 } 
@@ -62,6 +62,7 @@ public class ChessPieceBase : MonoBehaviour
     {
         if(chessPiece == this)
         {
+            chessPiece.transform.position = new Vector3(10,10,210); //TODO: find better solution
             gameObject.SetActive(false);
         }
     }

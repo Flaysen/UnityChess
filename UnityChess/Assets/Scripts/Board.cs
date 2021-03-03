@@ -30,6 +30,28 @@ public class Board : MonoBehaviour
         return (position.z >= BOARD_SIZE || position.x >= BOARD_SIZE || position.x < 0 || position.z < 0);
     }
 
+    public bool CheckIfCheck(PiecesColor color)
+    {
+        foreach (ChessPieceBase chessPiece in ChessPieces)
+        {
+            List<Vector3> moves = chessPiece?.GetMoves();
+            if(moves?.Count > 0)
+            {
+                foreach (Vector3 position in moves)
+                {
+                    ChessPieceBase piece = CheckIfPositionOccupied(position);
+                    if (piece?.Type == PiecesType.King && chessPiece.isActiveAndEnabled && piece?.Color == color)
+                    {
+                        Debug.Log("CHECK!!!");
+                        return true;
+                    }         
+                }
+            }
+           
+        }
+        return false;
+    }
+
     private void SpawnBoard()
     {
         for (int x = 0; x < BOARD_SIZE; x++)
@@ -49,7 +71,7 @@ public class Board : MonoBehaviour
 
         square.transform.parent = transform;
 
-        square.transform.localScale = new Vector3(.1f, 1f, .1f); //TODO set scale in prefab
+        square.transform.localScale = new Vector3(.1f, 1f, .1f); //TODO: set scale in prefab
         square.transform.position = position;  
 
 
